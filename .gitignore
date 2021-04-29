@@ -1,0 +1,8 @@
+**~
+**#**
+**.cache**
+./.env
+**/build/**
+**dist**
+**node_modules**
+**web-ext-artifacts**
