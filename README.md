@@ -1,5 +1,17 @@
 ## Docker
 
+### Why Use Docker?
+
+1. Things just work! No more worrying about dependencies and environments.
+1. Will get you your next job (after you make your Datavant millions).
+
+### What is Docker?
+
+There are two main objects in Docker:
+
+- Image - A snapshot of a Linux machine + a command to run on that machine.
+- Container - A slice of your computer (i.e. disk space, RAM, etc) that runs an image.
+
 ### Deploy Dev Env
 
 We start by using the dev Dockerfile:
@@ -162,3 +174,27 @@ cp docker-compose.dev.yaml docker-compose.yaml
 ```
 
 ### Complete Setup
+
+Again, we don't want our dev and prod envs diverging, so we'd like to reuse as much config as possible. Start by using the combined docker compose file:
+
+```
+cp docker-compose.final.yaml docker-compose.yaml
+```
+
+Then to spin up prod, use the prod `.env`:
+
+```
+cp .env.prod .env
+docker-compose up --build
+```
+
+And similarly for dev `.env`:
+
+```
+cp .env.dev .env
+docker-compose up --build
+```
+
+## Additional Resources
+
+- [This Udemy course](https://www.udemy.com/course/docker-and-kubernetes-the-complete-guide/) is good (Thanks Matt!).
