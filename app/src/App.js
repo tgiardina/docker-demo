@@ -17,6 +17,17 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={async () => {
+          try {
+            const response = await fetch('/incrCounter', { method: "POST" })
+            const json = await response.json()
+            alert(json)
+          } catch(err) {
+            console.log(err)
+          }
+        }} >
+          COUNT!
+        </button>
       </header>
     </div>
   );
