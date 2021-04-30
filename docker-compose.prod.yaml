@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: app
+    ports:
+      - '4000:80'
+
+  api:
+    build: api
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: db
+      DB_NAME: demo
+      DB_USER: postgres
+      DB_PASSWORD: password
+    ports:
+      - '5000:3000'
+
+  db:
+    image: postgres:13.2
+    restart: always
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql
+
+volumes:
+  db_data:      

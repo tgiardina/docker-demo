@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: app
+      dockerfile: Dockerfile
+      target: installer
+    command: npm start
+    ports:
+      - '4000:3000'
+    volumes:
+      - ./app/src:/app/src
+
+  api:
+    build: api
+    environment:
+      DB_CLIENT: pg
+      DB_HOST: db
+      DB_NAME: demo
+      DB_USER: postgres
+      DB_PASSWORD: password
+    ports:
+      - '5000:3000'
+
+  db:
+    image: postgres:13.2
+    restart: always
+    environment:
+      POSTGRES_DB: demo
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql
+
+volumes:
+  db_data:      
